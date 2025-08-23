@@ -9,9 +9,9 @@ import Logo from "./logo";
 import { motion } from "framer-motion";
 
 const menuItems = [
-  { name: "_Hello", href: "#link" },
-  { name: "Docs", href: "#link" },
-  { name: "Connect", href: "#link" },
+  { name: "_Hello", href: `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/login` },
+  { name: "Docs", href: `${process.env.NEXT_PUBLIC_DOCS_URL}/docs` },
+  { name: "Connect", href: `${process.env.NEXT_PUBLIC_CONSOLE_URL}/dashboard/issuer` },
   { name: "Pricing", href: "#link" },
   { name: "Community", href: "#link" },
 ];
@@ -22,6 +22,7 @@ export const Navbar = () => {
 
   const authPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/login`;
   const organizerPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/dashboard/issuer`;
+  const docsPageUrl = `${process.env.NEXT_PUBLIC_DOCS_URL}/docs`;
 
   React.useEffect(() => {
     const handleScroll = () => {

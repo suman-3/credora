@@ -61,7 +61,7 @@ export const Navbar = () => {
             {/* Left: Logo + Mobile Toggle */}
             <div className="flex w-full justify-between lg:w-auto">
               <Link
-                href="/"
+                href={`${process.env.NEXT_PUBLIC_WEB_URL}`}
                 aria-label="home"
                 className="flex items-center space-x-2"
               >
