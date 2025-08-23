@@ -26,12 +26,11 @@ const HeroSection = () => {
           >
             #1 AI automation provider ✨
           </MotionWrapper>
-
           {/* Main Heading Animation */}
           <MotionWrapper delay={0.4} duration={1} direction="up" distance={80}>
             <ClipText>
-              The Best <AIAutomationText /> — Trusted <br /> by leaders, Loved
-              by millions
+              Own Your <AIAutomationText /> - Securely <br />
+             Stored & Instantly Verified
             </ClipText>
           </MotionWrapper>
 
@@ -41,11 +40,10 @@ const HeroSection = () => {
             duration={0.7}
             direction="up"
             distance={60}
-            className="text-light text-center text-xl font-clash tracking-widest lowercase select-none"
+            className="text-light text-center text-xl lowercase font-clash tracking-widest select-none"
             blur={{ initial: 10, animate: 0 }}
           >
-            Automating complex workflows, enhancing efficiency, and streamlining
-            support <br /> so your business scales faster with precision
+           Credora lets professionals own credentials and organizations verify them <br /> instantly. Blockchain-powered, secure, and fraud-proof.
           </MotionWrapper>
 
           {/* Button Animation */}
@@ -57,12 +55,10 @@ const HeroSection = () => {
             className="flex items-center gap-4 mt-2"
           >
             <AnimatedButton className="font-clash font-semibold !tracking-wider w-52 lowercase">
-              Request Demo
+           Get Started
             </AnimatedButton>
-            <Button
-              className="rounded-full active:scale-95 !h-12 w-48 cursor-pointer text-lg font-clash border border-white text-light"
-            >
-              Explore Services
+            <Button className="rounded-full active:scale-95 lowercase !h-12 w-48 cursor-pointer text-lg font-clash border border-white text-light">
+Request a demo
             </Button>
           </MotionWrapper>
         </div>

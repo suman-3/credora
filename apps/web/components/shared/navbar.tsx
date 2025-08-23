@@ -86,7 +86,7 @@ export const Navbar = () => {
                   <li key={index}>
                     <Link
                       href={item.href}
-                      className="block text-white font-semibold tracking-wide font-clash text-[16px] transition-colors duration-150 hover:text-white"
+                      className="block text-white  lowercase font-semibold tracking-wide font-clash text-[16px] transition-colors duration-150 hover:text-light/70"
                     >
                       <span>{item.name}</span>
                     </Link>

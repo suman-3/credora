@@ -21,7 +21,7 @@ const AIAutomationText = () => {
       `}</style>
 
       <span className="relative inline-block">
-        <span className="ai-automation-text"> AI Automation</span>
+        <span className="ai-automation-text"> Achievements</span>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="549"

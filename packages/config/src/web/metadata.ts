@@ -1,22 +1,23 @@
 export const siteConfig = {
-    name: "Credora | ",
+    name: "Credora | Secure & Verifiable Blockchain Credentials",
     description:
-        "Lineo AI is your AI automation development partner—empowering agencies and businesses with tailored AI solutions to streamline operations, enhance productivity, and deploy intelligent AI agents that deliver real results.",
+        "Credora empowers individuals and organizations to securely validate, store, and own credentials on the blockchain—making achievements verifiable, tamper-proof, and universally accessible.",
     keywords: [
-        "AI Automation",
-        "AI Development Agency",
-        "Custom AI Solutions",
-        "AI Agents",
-        "Workflow Automation",
-        "Business Process Automation",
-        "AI for Agencies",
-        "Enterprise AI Solutions",
-        "Intelligent Automation",
-        "AI Integration Services",
+        "Blockchain Credentials",
+        "Digital Certificates",
+        "Credential Verification",
+        "Blockchain Identity",
+        "Decentralized Credentials",
+        "Skill Verification",
+        "Blockchain Certification",
+        "Secure Credentials",
+        "Web3 Education",
+        "Portable Credentials",
     ],
     url: "https://credora.tech",
-    home:{
-        title: "Credora | AI Automation Tools & Services for Agencies & Businesses",
-        description: "Lineo AI is your AI automation development partner—empowering agencies and businesses with tailored AI solutions to streamline operations, enhance productivity, and deploy intelligent AI agents that deliver real results.",
+    home: {
+        title: "Credora | Secure & Verifiable Blockchain Credentials",
+        description:
+            "Credora helps learners, professionals, and institutions validate, store, and own credentials on the blockchain—ensuring trust, security, and lifelong accessibility.",
     }
 };
