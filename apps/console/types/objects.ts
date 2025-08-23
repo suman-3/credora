@@ -10,7 +10,7 @@ export interface IUser {
     website?: string;
     documents?: string[];
   };
-  userType: 'student' | 'institution' | 'verifier';
+  userType: 'user' | 'institution' |'company' | 'verifier';
   isVerified: boolean;
   isAdmin?: boolean;
   credentialsOwned?: ICredentialOwnership[];

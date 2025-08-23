@@ -41,6 +41,7 @@ import {
   IconLogout,
   IconPhotoUp,
   IconUserCircle,
+  IconUserShield,
 } from "@tabler/icons-react";
 
 import Link from "next/link";
@@ -190,7 +191,9 @@ export default function AppSidebar() {
                             (subItem: (typeof item.items)[0]) => {
                               const SubIcon = getIcon(subItem.icon || "");
                               return (
-                                <SidebarMenuSubItem key={`${subItem.title}-${subItem.url}`}>
+                                <SidebarMenuSubItem
+                                  key={`${subItem.title}-${subItem.url}`}
+                                >
                                   <SidebarMenuSubButton
                                     asChild
                                     isActive={pathname === subItem.url}
@@ -271,13 +274,14 @@ export default function AppSidebar() {
                   <DropdownMenuSeparator />
 
                   <DropdownMenuGroup>
-                    <DropdownMenuItem
-                    
-                      onClick={() => router.push("/auth/organizer")}
-                    >
-                      <IconUserCircle className="mr-2 h-4 w-4" />
-                  Become an Organizer
-                    </DropdownMenuItem>
+                    {user?.userType === "user" && (
+                      <DropdownMenuItem
+                        onClick={() => router.push("/dashboard/issuer")}
+                      >
+                        <IconUserShield className="mr-2 h-4 w-4" />
+                        Become an Issuer
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuItem
                       onClick={() => router.push("/dashboard/profile")}
                     >

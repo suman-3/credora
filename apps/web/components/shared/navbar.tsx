@@ -21,7 +21,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
 
   const authPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/login`;
-  const organizerPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/organizer`;
+  const organizerPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/dashboard/issuer`;
 
   React.useEffect(() => {
     const handleScroll = () => {
