@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { Suspense } from 'react'
 import VerifyPage from './_components/verify-page'
 import { Metadata } from 'next';
 import { siteConfig } from '@workspace/config/console/metadata';
+import LoaderPage from '@/components/shared/loader-page';
 
 
 export const metadata: Metadata = {
@@ -16,7 +17,9 @@ const VerificationPage = () => {
 
   
   return (
-    <VerifyPage />
+   <Suspense fallback={<LoaderPage />}>
+     <VerifyPage />
+   </Suspense>
   )
 }
 
