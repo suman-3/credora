@@ -200,4 +200,9 @@
   html::-webkit-scrollbar, body::-webkit-scrollbar {
     display: none;
   }
+
+  .card-bg {
+    background: url("/card-bg.png") bottom/cover no-repeat;
+    background-blend-mode: normal;
+  }
 }
