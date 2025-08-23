@@ -2,6 +2,7 @@
 import { Metadata } from "next";
 import HeroSection from "./_components/hero";
 import { siteConfig } from "@workspace/config/web/metadata";
+import LogoCloud from "./_components/logo-cloude";
 
 export const metadata: Metadata = {
   title: {
@@ -13,8 +14,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col gap-4">
+    <main className="w-full flex flex-col">
       <HeroSection />
+      <LogoCloud/>
     </main>
   );
 }
