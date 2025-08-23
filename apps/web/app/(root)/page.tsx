@@ -4,6 +4,7 @@ import HeroSection from "./_components/hero";
 import { siteConfig } from "@workspace/config/web/metadata";
 import LogoCloud from "./_components/logo-cloude";
 import Works from "./_components/works";
+import CTASection from "./_components/cta";
 
 export const metadata: Metadata = {
   title: {
@@ -19,6 +20,7 @@ export default function Home() {
       <HeroSection />
       <LogoCloud/>
       <Works/>
+      <CTASection />
     </main>
   );
 }

@@ -205,4 +205,14 @@
     background: url("/card-bg.png") bottom/cover no-repeat;
     background-blend-mode: normal;
   }
+  .card4-bg {
+    background: url("/overlay.png") bottom/cover no-repeat;
+    background-blend-mode: normal;
+  }
+  .cta-bg {
+    background: url("/cta-bg.png");
+    background-size: 110%;
+    background-repeat: no-repeat;
+    background-position: top;
+  }
 }
