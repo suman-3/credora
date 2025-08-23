@@ -31,9 +31,9 @@ const images = [
 
 export default function LogoCloud() {
   return (
-    <section className="overflow-hidden py-10 bg-[#070E02]">
+    <section className="overflow-hidden py-20 bg-[#070E02]">
       <div className="group relative mx-auto max-w-screen-2xl flex flex-col items-center gap-4 px-6">
-        <h1 className="text-white font-clash">technologies use to built</h1>
+        <h1 className="text-white font-clash">// &nbsp; technologies used to built &nbsp; //</h1>
         <div className="relative py-6 w-full">
           <InfiniteSlider speedOnHover={20} speed={40} gap={112}>
             {images.map((image, index) => (
