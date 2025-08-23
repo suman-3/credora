@@ -1,0 +1,130 @@
+---
+title: User Authentication
+description: Secure authentication process for users using wallet and email verification
+---
+
+# User Authentication
+
+![User Authentication](/hero/metamask.png)
+
+## Overview
+
+The User Authentication process ensures secure access to the platform by combining wallet-based authentication with email verification. This dual-layer approach provides both security and user-friendly access management.
+
+## Authentication Flow
+
+### Step 1: Wallet Connection
+Users must connect their digital wallet (MetaMask, WalletConnect, etc.) to establish their blockchain identity.
+
+**Supported Wallets:**
+- MetaMask
+- WalletConnect
+- Coinbase Wallet
+- Trust Wallet
+
+### Step 2: Email Verification
+After successful wallet connection, users provide their email address for additional verification and platform communications.
+
+## Technical Process
+
+### Wallet Integration
+```javascript
+// Example wallet connection flow
+const connectWallet = async () => {
+  if (window.ethereum) {
+    const accounts = await window.ethereum.request({
+      method: 'eth_requestAccounts'
+    });
+    return accounts[0];
+  }
+}
+```
+
+### Authentication States
+
+#### Success Scenario
+- ✅ Wallet connected successfully
+- ✅ Email verified
+- ✅ User proceeds to database check
+
+#### Failure Scenarios
+- ❌ **Wallet Connection Failed**: User cannot connect wallet
+  - *Action*: Retry connection or try different wallet
+- ❌ **Email Verification Failed**: Invalid or unverified email
+  - *Action*: Re-enter email and verify
+- ❌ **Network Issues**: Connection problems
+  - *Action*: Check internet connection and retry
+
+## Security Features
+
+### Wallet Security
+- **Private Key Protection**: Never stored on platform
+- **Signature Verification**: Cryptographic proof of ownership
+- **Network Validation**: Ensures connection to correct blockchain
+
+### Email Security
+- **Verification Links**: Time-limited verification emails
+- **Spam Protection**: Rate limiting and validation
+- **Privacy**: Email only used for essential communications
+
+## User Experience
+
+### Loading States
+- Wallet connection progress indicator
+- Email verification pending state
+- Clear success/error messaging
+
+### Error Handling
+- User-friendly error messages
+- Troubleshooting guides
+- Support contact information
+
+## Database Integration
+
+After successful authentication, the system:
+1. Checks if user exists in database
+2. Creates new user record if needed
+3. Updates last login timestamp
+4. Generates session token
+
+## Privacy & Data Protection
+
+### Data Collected
+- Wallet address (public)
+- Email address (encrypted)
+- Login timestamps
+- Platform preferences
+
+### Data Not Collected
+- Private keys
+- Wallet contents
+- Personal identification (unless voluntarily provided)
+
+## Common Issues & Solutions
+
+### MetaMask Not Detected
+**Problem**: Browser doesn't detect MetaMask
+**Solution**: 
+- Install MetaMask extension
+- Refresh page after installation
+- Check browser compatibility
+
+### Wrong Network
+**Problem**: Wallet connected to wrong blockchain network
+**Solution**:
+- Guide user to switch networks
+- Provide network configuration details
+
+### Email Not Received
+**Problem**: Verification email not received
+**Solution**:
+- Check spam folder
+- Resend verification email
+- Try alternative email address
+
+## Next Steps
+
+After successful authentication:
+- Proceed to [Database Check](/docs/database-check)
+- If new user: [User Registration](/docs/user-registration)
+- If existing user: [User Dashboard](/docs/user-dashboard)
