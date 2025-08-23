@@ -3,7 +3,6 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { Text } from "lucide-react";
 import Image from "next/image";
-import { CellAction } from "./cell-action";
 
 import { format } from "date-fns";
 import { IOrganisationApplication } from "@/types/objects";
@@ -15,13 +14,6 @@ export const columns: ColumnDef<IOrganisationApplication>[] = [
     accessorKey: "id",
     header: "ID",
     cell: ({ cell }) => <div>{cell.getValue<IOrganisationApplication["id"]>()}</div>,
-  },
-  
-    {
-    id: "user",
-    accessorKey: "user",
-    header: "User name",
-    cell: ({ cell }) => <div>{cell.getValue<IOrganisationApplication["user"]>()?.name}</div>,
   },
     {
     id: "type",
@@ -59,10 +51,5 @@ export const columns: ColumnDef<IOrganisationApplication>[] = [
         </div>
       );
     },
-  },
-  {
-    id: "actions",
-    header: "Actions",
-    cell: ({ row }) => <CellAction data={row.original} />,
   },
 ];

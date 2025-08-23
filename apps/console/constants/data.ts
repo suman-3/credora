@@ -20,4 +20,11 @@ export const navItems: NavItem[] = [
     isActive: false,
     roles: ["verifier"],
   },
+  {
+    title: "Your Applications",
+    url: "/dashboard/applicationsu",
+    icon: "IconFileSmile",
+    isActive: false,
+    roles: ["institution", "user", "company"],
+  },
 ];

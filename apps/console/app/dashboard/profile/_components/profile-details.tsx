@@ -58,7 +58,7 @@ const ProfileDetails = () => {
 
   const updateProfileMutation = useMutation({
     mutationFn: async (data: FormData) => {
-      const response = await ApiInstance.patch("/auth/profile", data);
+      const response = await ApiInstance.put("/auth/profile", data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -87,7 +87,6 @@ const ProfileDetails = () => {
   React.useEffect(() => {
     if (userData) {
       const defaultImage =
-        userData.image ||
         `https://avatar.vercel.sh/${userData.name || "User"}.svg?text=${(
           userData.name || "U"
         )

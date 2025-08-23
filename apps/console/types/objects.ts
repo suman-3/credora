@@ -1,5 +1,4 @@
 export interface IUser {
-  image: string;
   _id?: string;
   walletAddress: string;
   email: string;
@@ -11,7 +10,7 @@ export interface IUser {
     website?: string;
     documents?: string[];
   };
-  userType: 'user' | 'institution' |'company' | 'verifier';
+  userType: 'user' | 'institution' | 'employer' | 'verifier';
   isVerified: boolean;
   isAdmin?: boolean;
   credentialsOwned?: ICredentialOwnership[];
@@ -19,6 +18,14 @@ export interface IUser {
     notifications: boolean;
     publicProfile: boolean;
   };
+  blockchain?: {
+    isRegistered: boolean;
+    registrationTxHash?: string;
+    registrationBlockNumber?: number;
+    registeredAt?: Date;
+  };
+  otp?: string;
+  otpExpiry?: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }
