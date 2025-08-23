@@ -2,9 +2,15 @@
 
 import React from 'react'
 
-const AuthLayout = () => {
+interface AuthLayoutProps {
+  children: React.ReactNode;
+}
+
+const AuthLayout = ({ children }: AuthLayoutProps) => {
   return (
-    <div>AuthLayout</div>
+    <div className='w-full flex min-h-screen h-full items-center justify-center hero-bg'>
+      {children}
+    </div>
   )
 }
 

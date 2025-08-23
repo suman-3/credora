@@ -7,8 +7,10 @@ import MotionWrapper from "@/components/shared/motion-wrapper";
 import AnimatedButton from "./animation/hero/animated-button";
 import { cn } from "@workspace/ui/lib/utils";
 import { Button } from "@workspace/ui/components/button";
+import { useRouter } from "next/navigation";
 
 const HeroSection = () => {
+  const router = useRouter();
   return (
     <MaxWrapper className="w-full">
       <div className="w-full relative  min-h-svh md:min-h-lvh hero-bg flex items-center justify-center overflow-hidden xl:max-w-screen-2xl mx-auto">
@@ -24,13 +26,13 @@ const HeroSection = () => {
             )}
             blur={{ initial: 4, animate: 0 }}
           >
-            #1 AI automation provider ✨
+            #1 Choice for Secure On-Chain Proof ✨
           </MotionWrapper>
           {/* Main Heading Animation */}
           <MotionWrapper delay={0.4} duration={1} direction="up" distance={80}>
             <ClipText>
               Own Your <AIAutomationText /> - Securely <br />
-             Stored & Instantly Verified
+              Stored & Instantly Verified
             </ClipText>
           </MotionWrapper>
 
@@ -43,7 +45,8 @@ const HeroSection = () => {
             className="text-light text-center text-xl lowercase font-clash tracking-widest select-none"
             blur={{ initial: 10, animate: 0 }}
           >
-           Credora lets professionals own credentials and organizations verify them <br /> instantly. Blockchain-powered, secure, and fraud-proof.
+            Credora lets professionals own credentials and organizations verify
+            them <br /> instantly. Blockchain-powered, secure, and fraud-proof.
           </MotionWrapper>
 
           {/* Button Animation */}
@@ -54,11 +57,16 @@ const HeroSection = () => {
             distance={40}
             className="flex items-center gap-4 mt-2"
           >
-            <AnimatedButton className="font-clash font-semibold !tracking-wider w-52 lowercase">
-           Get Started
+            <AnimatedButton
+              onClick={() => {
+                router.push("/auth");
+              }}
+              className="font-clash font-semibold !tracking-wider w-52 lowercase"
+            >
+              Get Started
             </AnimatedButton>
             <Button className="rounded-full active:scale-95 lowercase !h-12 w-48 cursor-pointer text-lg font-clash border border-white text-light">
-Request a demo
+              Request a demo
             </Button>
           </MotionWrapper>
         </div>
