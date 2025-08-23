@@ -11,7 +11,7 @@ import { Button } from "@workspace/ui/components/button";
 const HeroSection = () => {
   return (
     <MaxWrapper className="w-full">
-      <div className="w-full relative md:min-h-lvh hero-bg flex items-center justify-center overflow-hidden xl:max-w-screen-2xl mx-auto">
+      <div className="w-full relative  min-h-svh md:min-h-lvh hero-bg flex items-center justify-center overflow-hidden xl:max-w-screen-2xl mx-auto">
         <div className="flex flex-col items-center justify-center gap-6">
           {/* Badge Animation */}
           <MotionWrapper
@@ -20,7 +20,7 @@ const HeroSection = () => {
             direction="up"
             distance={50}
             className={cn(
-              "px-5 py-0.5 select-none text-font lowercase bg-[#42602F]/40 rounded-full font-clash tracking-wider"
+              "px-5 py-0.5 select-none text-light lowercase bg-[#42602F]/40 rounded-full font-clash tracking-wider"
             )}
             blur={{ initial: 4, animate: 0 }}
           >
@@ -41,7 +41,7 @@ const HeroSection = () => {
             duration={0.7}
             direction="up"
             distance={60}
-            className="text-font text-center text-xl font-clash tracking-widest lowercase select-none"
+            className="text-light text-center text-xl font-clash tracking-widest lowercase select-none"
             blur={{ initial: 10, animate: 0 }}
           >
             Automating complex workflows, enhancing efficiency, and streamlining
@@ -60,7 +60,7 @@ const HeroSection = () => {
               Request Demo
             </AnimatedButton>
             <Button
-              className="rounded-full active:scale-95 !h-12 w-48 cursor-pointer text-lg font-clash border border-white text-font"
+              className="rounded-full active:scale-95 !h-12 w-48 cursor-pointer text-lg font-clash border border-white text-light"
             >
               Explore Services
             </Button>

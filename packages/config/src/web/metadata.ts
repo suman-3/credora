@@ -1,5 +1,5 @@
 export const siteConfig = {
-    name: "Lineo AI | AI Automation Tools & Services for Agencies & Businesses",
+    name: "Credora | ",
     description:
         "Lineo AI is your AI automation development partner—empowering agencies and businesses with tailored AI solutions to streamline operations, enhance productivity, and deploy intelligent AI agents that deliver real results.",
     keywords: [
@@ -14,9 +14,9 @@ export const siteConfig = {
         "Intelligent Automation",
         "AI Integration Services",
     ],
-    url: "https://lineoai.com",
+    url: "https://credora.tech",
     home:{
-        title: "Lineo AI | AI Automation Tools & Services for Agencies & Businesses",
+        title: "Credora | AI Automation Tools & Services for Agencies & Businesses",
         description: "Lineo AI is your AI automation development partner—empowering agencies and businesses with tailored AI solutions to streamline operations, enhance productivity, and deploy intelligent AI agents that deliver real results.",
     }
 };

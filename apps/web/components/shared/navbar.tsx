@@ -1,18 +1,19 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { Menu, X } from 'lucide-react';
-import React from 'react';
-import { cn } from '@workspace/ui/lib/utils';
-import { Button } from '@workspace/ui/components/button';
-import Logo from './logo';
+import Link from "next/link";
+import { Menu, X } from "lucide-react";
+import React from "react";
+import { cn } from "@workspace/ui/lib/utils";
+import { Button } from "@workspace/ui/components/button";
+import Logo from "./logo";
+import { motion } from "framer-motion";
 
 const menuItems = [
-  { name: '_Hello', href: '#link' },
-  { name: 'Docs', href: '#link' },
-  { name: 'Connect', href: '#link' },
-  { name: 'Pricing', href: '#link' },
-  { name: 'Community', href: '#link' },
+  { name: "_Hello", href: "#link" },
+  { name: "Docs", href: "#link" },
+  { name: "Connect", href: "#link" },
+  { name: "Pricing", href: "#link" },
+  { name: "Community", href: "#link" },
 ];
 
 export const Navbar = () => {
@@ -23,46 +24,53 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
     };
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  // Close mobile menu on route change if needed (optional)
-  // const pathname = usePathname();
-  // React.useEffect(() => { setMenuState(false); }, [pathname]);
 
   return (
     <header>
-      <nav
-        data-state={menuState ? 'active' : 'inactive'}
+      <motion.nav
+        data-state={menuState ? "active" : "inactive"}
         className="fixed inset-x-0 top-0 z-50 w-full px-2"
         aria-label="Main Navigation"
+        initial={{ y: -100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{
+          duration: 0.4,
+          ease: [0.25, 0.46, 0.45, 0.94],
+          delay: 0.1,
+        }}
       >
         <div
           className={cn(
             // Base (not scrolled)
-            'mx-auto mt-2 max-w-6xl px-6 transition-all duration-300 ease-out will-change-transform lg:px-12',
+            "mx-auto mt-2 rounded-2xl border-light/30 max-w-6xl px-6 transition-all duration-300 ease-out will-change-transform lg:px-12",
             // Scrolled state: shrink width, add glass/blur, rounded frame, border and tighter padding
             isScrolled &&
-              'max-w-4xl rounded-2xl border bg-background/60 backdrop-blur-lg lg:px-5'
+              "max-w-4xl rounded-2xl border border-light/20 bg-dark/60 backdrop-blur-lg lg:px-5"
           )}
         >
           <div
             className={cn(
-              'relative flex flex-wrap items-center justify-between gap-6 py-3 transition-[padding,margin] duration-300 lg:gap-0 lg:py-4',
+              "relative flex flex-wrap items-center justify-between gap-6 py-3 transition-[padding,margin] duration-300 lg:gap-0 lg:py-4",
               // Slightly reduce vertical padding when scrolled for a “shrink” effect
-              isScrolled && 'py-2 lg:py-3'
+              isScrolled && "py-2 lg:py-3"
             )}
           >
             {/* Left: Logo + Mobile Toggle */}
             <div className="flex w-full justify-between lg:w-auto">
-              <Link href="/" aria-label="home" className="flex items-center space-x-2">
+              <Link
+                href="/"
+                aria-label="home"
+                className="flex items-center space-x-2"
+              >
                 <Logo />
               </Link>
 
               <button
                 onClick={() => setMenuState((s) => !s)}
-                aria-label={menuState ? 'Close Menu' : 'Open Menu'}
+                aria-label={menuState ? "Close Menu" : "Open Menu"}
                 className="relative z-20 -m-2.5 -mr-4 block cursor-pointer p-2.5 lg:hidden"
               >
                 {/* Crossfade icons based on data-state via Tailwind arbitrary variants */}
@@ -78,7 +86,7 @@ export const Navbar = () => {
                   <li key={index}>
                     <Link
                       href={item.href}
-                      className="block text-white font-clash text-[16px] transition-colors duration-150 hover:text-white"
+                      className="block text-white font-semibold tracking-wide font-clash text-[16px] transition-colors duration-150 hover:text-white"
                     >
                       <span>{item.name}</span>
                     </Link>
@@ -91,11 +99,11 @@ export const Navbar = () => {
             <div
               className={cn(
                 // Mobile panel (hidden by default)
-                'bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent',
+                "bg-background in-data-[state=active]:block lg:in-data-[state=active]:flex mb-6 hidden w-full flex-wrap items-center justify-end space-y-8 rounded-3xl border p-6 shadow-2xl shadow-zinc-300/20 md:flex-nowrap lg:m-0 lg:flex lg:w-fit lg:gap-6 lg:space-y-0 lg:border-transparent lg:bg-transparent lg:p-0 lg:shadow-none dark:shadow-none dark:lg:bg-transparent",
                 // Animate panel slide/fade on open for mobile
                 menuState
-                  ? 'animate-in fade-in-0 slide-in-from-top-3 duration-200'
-                  : 'animate-out fade-out-0 slide-out-to-top-3 duration-150'
+                  ? "animate-in fade-in-0 slide-in-from-top-3 duration-200"
+                  : "animate-out fade-out-0 slide-out-to-top-3 duration-150"
               )}
             >
               {/* Mobile menu list */}
@@ -105,7 +113,7 @@ export const Navbar = () => {
                     <li key={index}>
                       <Link
                         href={item.href}
-                        className="block text-white font-clash text-sm transition-colors duration-150 hover:text-white"
+                        className="block text-white font-semibold tracking-wide font-clash text-sm transition-colors duration-150 hover:text-white"
                       >
                         <span>{item.name}</span>
                       </Link>
@@ -121,13 +129,17 @@ export const Navbar = () => {
                   size="md"
                   variant="outline"
                   // Hide these on large when scrolled, to only show the single “Get Started”
-                  className={cn(isScrolled && 'lg:hidden')}
+                  className={cn(isScrolled && "lg:hidden")}
                 >
                   <Link href="#">
                     <span>Become An Organizer</span>
                   </Link>
                 </Button>
-                <Button asChild size="md" className={cn(isScrolled && 'lg:hidden')}>
+                <Button
+                  asChild
+                  size="md"
+                  className={cn(isScrolled && "lg:hidden")}
+                >
                   <Link href="#">
                     <span>Log In</span>
                   </Link>
@@ -138,7 +150,7 @@ export const Navbar = () => {
                   asChild
                   size="md"
                   variant="outline"
-                  className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}
+                  className={cn(isScrolled ? "lg:inline-flex" : "hidden")}
                 >
                   <Link href="#">
                     <span>Get Started</span>
@@ -148,7 +160,7 @@ export const Navbar = () => {
             </div>
           </div>
         </div>
-      </nav>
+      </motion.nav>
     </header>
   );
 };

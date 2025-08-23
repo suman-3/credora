@@ -12,7 +12,7 @@ const ClipText = ({ className, text, children }: ClipTextProps) => {
   return (
     <h1
       className={cn(
-        "text-7xl font-semibold text-font font-syne text-center leading-[5rem] lowercase select-none",
+        "text-7xl font-semibold text-light font-syne text-center leading-[5rem] lowercase select-none",
         className
       )}
       style={{

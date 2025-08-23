@@ -71,7 +71,7 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   /* custom colors */
-  --color-font: #fffce1;
+  --color-light: #fffce1;
   --color-dark: #070e02;
 
   /* custom animations */
@@ -191,5 +191,13 @@
   .hero-bg {
     background: url("/hero/bg.webp") bottom/cover no-repeat;
     background-blend-mode: normal;
+  }
+
+  html, body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none;
   }
 }

@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <main className="w-full flex flex-col gap-4 min-h-[400vh]">
+    <main className="w-full flex flex-col gap-4">
       <HeroSection />
     </main>
   );
