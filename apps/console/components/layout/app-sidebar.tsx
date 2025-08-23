@@ -18,7 +18,6 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupLabel,
   SidebarHeader,
   SidebarMenu,
   SidebarMenuButton,
@@ -272,6 +271,13 @@ export default function AppSidebar() {
                   <DropdownMenuSeparator />
 
                   <DropdownMenuGroup>
+                    <DropdownMenuItem
+                    
+                      onClick={() => router.push("/auth/organizer")}
+                    >
+                      <IconUserCircle className="mr-2 h-4 w-4" />
+                  Become an Organizer
+                    </DropdownMenuItem>
                     <DropdownMenuItem
                       onClick={() => router.push("/dashboard/profile")}
                     >

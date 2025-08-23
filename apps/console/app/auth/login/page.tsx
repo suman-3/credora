@@ -46,9 +46,11 @@ export default function AuthPage() {
 
   const router = useRouter();
 
-  if(token){
-    router.replace("/dashboard");
-  }
+  React.useEffect(() => {
+    if (token) {
+      router.replace("/dashboard");
+    }
+  }, [token, router]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

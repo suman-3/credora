@@ -21,6 +21,7 @@ export const Navbar = () => {
   const [isScrolled, setIsScrolled] = React.useState(false);
 
   const authPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/login`;
+  const organizerPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/organizer`;
 
   React.useEffect(() => {
     const handleScroll = () => {
@@ -133,8 +134,8 @@ export const Navbar = () => {
                   // Hide these on large when scrolled, to only show the single “Get Started”
                   className={cn(isScrolled && "lg:hidden")}
                 >
-                  <Link href="#">
-                    <span>Become An Organizer</span>
+                  <Link href={organizerPageUrl}>
+                    <span>Become An Issuer</span>
                   </Link>
                 </Button>
                 <Button
