@@ -117,9 +117,11 @@ export default function AppSidebar() {
         // If item has children, filter them based on roles
         if (item.items && item.items.length > 0) {
           const filteredChildren = item.items.filter(
-            (subItem: { roles: string | string[] }) => {
+            (subItem) => {
               if (subItem.roles) {
-                return subItem.roles.includes(user?.userType || "");
+                return Array.isArray(subItem.roles)
+                  ? subItem.roles.includes(user?.userType || "")
+                  : subItem.roles === user?.userType;
               }
               return true;
             }
@@ -276,6 +278,7 @@ export default function AppSidebar() {
                   <DropdownMenuGroup>
                     {user?.userType === "user" && (
                       <DropdownMenuItem
+                        className="capitalize"
                         onClick={() => router.push("/dashboard/issuer")}
                       >
                         <IconUserShield className="mr-2 h-4 w-4" />
@@ -283,6 +286,7 @@ export default function AppSidebar() {
                       </DropdownMenuItem>
                     )}
                     <DropdownMenuItem
+                      className="capitalize"
                       onClick={() => router.push("/dashboard/profile")}
                     >
                       <IconUserCircle className="mr-2 h-4 w-4" />

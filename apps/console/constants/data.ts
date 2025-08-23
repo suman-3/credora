@@ -15,7 +15,7 @@ export type Product = {
 export const navItems: NavItem[] = [
   {
     title: "Applications",
-    url: "/dashboard/applcaitions",
+    url: "/dashboard/applications",
     icon: "IconFileSmile",
     isActive: false,
     roles: ["verifier"],

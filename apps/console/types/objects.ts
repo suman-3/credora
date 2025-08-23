@@ -1,4 +1,5 @@
 export interface IUser {
+  image: string;
   _id?: string;
   walletAddress: string;
   email: string;
@@ -28,4 +29,16 @@ export interface ICredentialOwnership {
   credentialType: string;
   issueDate: Date;
   onChain: boolean;
+}
+
+export interface IOrganisationApplication extends Document {
+  id: string;
+  user: IUser;
+  type: 'institution' | 'company';
+  description: string;
+  document: string;
+  status: 'pending' | 'approved' | 'rejected';
+  rejectionReason?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

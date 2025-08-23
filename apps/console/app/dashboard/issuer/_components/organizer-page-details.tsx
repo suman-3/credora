@@ -4,6 +4,8 @@ import { FileUploader } from "@/components/shared/file-uploader";
 import Logo from "@/components/shared/logo";
 import { MaxWrapper } from "@/components/shared/max-wrapper";
 import { useAuth } from "@/hooks/auth/use-auth";
+import { ApiInstance } from "@/lib/apis";
+import { useMutation } from "@tanstack/react-query";
 import { Button } from "@workspace/ui/components/button";
 import { Input } from "@workspace/ui/components/input";
 import { Label } from "@workspace/ui/components/label";
@@ -22,18 +24,17 @@ const OrganizerPageDetails = () => {
   const { user } = useAuth();
   const router = useRouter();
 
-  React.useEffect(() => {
-    if (user?.userType !== "user") {
-      router.replace("/dashboard");
-    }
-  }, [user, router]);
+  // React.useEffect(() => {
+  //   if (user?.userType !== "user") {
+  //     router.replace("/dashboard");
+  //   }
+  // }, [user, router]);
+
   const [formData, setFormData] = useState({
     issuerType: "",
     description: "",
     document: "", // Single file URL as string
   });
-
-  const [fileUrls, setFileUrls] = useState<string[]>([]); // For FileUploader component
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -54,18 +55,16 @@ const OrganizerPageDetails = () => {
 
   // Handle file upload - extract single URL
   const handleFileUpload = (fileUrls: string[]) => {
-    setFileUrls(fileUrls);
     // Get the first (and only) file URL since we're using single upload
     const singleFileUrl = fileUrls.length > 0 ? fileUrls[0] : "";
     setFormData((prev) => ({
       ...prev,
-      document: singleFileUrl || "",
+      document: singleFileUrl ?? "",
     }));
   };
 
   // Handle file removal
   const handleFileRemove = (removedUrl: string) => {
-    setFileUrls([]);
     setFormData((prev) => ({
       ...prev,
       document: "",
@@ -88,6 +87,49 @@ const OrganizerPageDetails = () => {
     return true;
   };
 
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (data: {
+      description: string;
+      document: string;
+      type: string;
+    }) => {
+      try {
+        const response = await ApiInstance.post("/organization/applications", {
+          description: data.description,
+          document: data.document,
+          type: data.type,
+        });
+
+        return response.data;
+      } catch (error: any) {
+        if (error.response?.status === 500) {
+          throw new Error(
+            "Server error occurred while submitting. Please try again."
+          );
+        }
+        throw error;
+      }
+    },
+    onSuccess: () => {
+      toast.success("Application submitted successfully!");
+      // Optional: Reset form or redirect
+      router.replace("/dashboard/profile");
+      setFormData({
+        issuerType: "",
+        description: "",
+        document: "",
+      });
+   
+    },
+    onError: (error: any) => {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "Failed to submit application";
+      toast.error(errorMessage);
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -95,15 +137,12 @@ const OrganizerPageDetails = () => {
       return;
     }
 
-    // Form data now contains single document URL as string
-    const submitData = {
-      issuerType: formData.issuerType,
+    // Submit data using the mutation
+    mutate({
+      type: formData.issuerType,
       description: formData.description,
-      document: formData.document, // Single file URL string
-    };
-
-    console.log("Form Data:", submitData);
-    toast.success("Application submitted successfully!");
+      document: formData.document,
+    });
   };
 
   return (
@@ -165,6 +204,7 @@ const OrganizerPageDetails = () => {
                 onChange={handleInputChange}
                 className="min-h-[80px] resize-none"
                 required
+                disabled={isPending}
               />
             </div>
 
@@ -173,21 +213,28 @@ const OrganizerPageDetails = () => {
               <Label htmlFor="document" className="block text-sm font-clash">
                 Supporting Document <span className="text-red-500">*</span>
               </Label>
-              <FileUploader
-                value={fileUrls} // Pass array to FileUploader
-                onChange={handleFileUpload}
-                onRemove={handleFileRemove}
-                uploaderType="single"
-                placeholder="Upload registration certificate or business license..."
-              />
               <p className="text-xs text-muted-foreground">
                 Upload your organization's registration certificate, business
                 license, or other supporting document (PDF only, max 10MB)
               </p>
+
+              {/* FileUploader Component Integration */}
+              <FileUploader
+                onChange={handleFileUpload}
+                onRemove={handleFileRemove}
+                value={formData.document ? [formData.document] : []} // Convert single URL to array
+                uploaderType="single"
+                placeholder="Choose PDF file..."
+                disabled={isPending}
+              />
             </div>
 
-            <Button type="submit" className="w-full cursor-pointer">
-              Submit Application
+            <Button
+              type="submit"
+              className="w-full cursor-pointer"
+              disabled={isPending}
+            >
+              {isPending ? "Submitting..." : "Submit Application"}
             </Button>
           </form>
         </div>

@@ -9,8 +9,8 @@ import { DataTableSliderFilter } from './data-table-slider-filter';
 import { DataTableViewOptions } from './data-table-view-options';
 import { Button } from '@workspace/ui/components/button';
 import { Input } from '@workspace/ui/components/input';
-import { cn } from '@/lib/utils';
 import { Cross2Icon } from '@radix-ui/react-icons';
+import { cn } from '@workspace/ui/lib/utils';
 
 interface DataTableToolbarProps<TData> extends React.ComponentProps<'div'> {
   table: Table<TData>;

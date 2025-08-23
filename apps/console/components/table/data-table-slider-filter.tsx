@@ -13,8 +13,8 @@ import {
 } from '@workspace/ui/components/popover';
 import { Separator } from '@workspace/ui/components/separator';
 import { Slider } from '@workspace/ui/components/slider';
-import { cn } from '@/lib/utils';
 import { PlusCircle, XCircle } from 'lucide-react';
+import { cn } from '@workspace/ui/lib/utils';
 
 interface Range {
   min: number;
