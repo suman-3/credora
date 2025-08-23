@@ -39,10 +39,16 @@ export default function AuthPage() {
   const [showCheckEmail, setShowCheckEmail] = React.useState(false);
   const [isRedirecting, setIsRedirecting] = React.useState(false); // Add this state
 
+
+
   // Use the auth hook
-  const { login } = useAuth();
+  const { login, token } = useAuth();
 
   const router = useRouter();
+
+  if(token){
+    router.replace("/dashboard");
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

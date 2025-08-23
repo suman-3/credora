@@ -1,9 +1,7 @@
 "use client";
 
 import type { ThemeProviderProps } from "next-themes";
-import { ThemeProvider } from "next-themes";
 import { Toaster } from "@workspace/ui/components/sonner";
-import { TooltipProvider } from "@workspace/ui/components/tooltip";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 
 import {
@@ -12,6 +10,8 @@ import {
   QueryClientProvider,
 } from "@tanstack/react-query";
 import { useState } from "react";
+import { TooltipProvider } from "@workspace/ui/components/tooltip";
+
 
 type DesignSystemProviderProperties = ThemeProviderProps & {
   privacyUrl?: string;
@@ -19,7 +19,7 @@ type DesignSystemProviderProperties = ThemeProviderProps & {
   helpUrl?: string;
 };
 
-export const Provider = ({
+export const DesignSystemProvider = ({
   children,
   privacyUrl,
   termsUrl,
@@ -45,9 +45,7 @@ export const Provider = ({
     <QueryClientProvider client={queryClient}>
       <NuqsAdapter>
         <TooltipProvider>
-          <ThemeProvider defaultTheme="dark" forcedTheme="dark" {...properties}>
-            {children}
-          </ThemeProvider>
+          {children}
           <Toaster richColors closeButton />
         </TooltipProvider>
       </NuqsAdapter>

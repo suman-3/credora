@@ -1,14 +1,12 @@
-import { Geist, Geist_Mono } from "next/font/google";
+
 import { Syne } from "next/font/google";
 import localFont from "next/font/local";
 import "@workspace/ui/globals.css";
-import { cn } from "@workspace/ui/lib/utils";
 import { Metadata } from "next";
 import { siteConfig } from "@workspace/config/console/metadata";
-import { Provider } from "@/components/provider";
-import { Navbar } from "../components/shared/navbar";
-
-
+import { DesignSystemProvider } from "@/components/provider";
+import { Arapey, Manrope, Karla } from "next/font/google";
+import NextTopLoader from "nextjs-toploader";
 const syne = Syne({
   subsets: ["latin"],
   variable: "--font-syne",
@@ -19,6 +17,23 @@ const clash = localFont({
   src: "./font/clash.otf",
   variable: "--font-clash",
 });
+
+const primary = Karla({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-primary",
+});
+const secondary = Arapey({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-secondary",
+});
+const tertiary = Manrope({
+  subsets: ["latin"],
+  weight: "400",
+  variable: "--font-tertiary",
+});
+
 export const metadata: Metadata = {
   title: {
     default: siteConfig.name,
@@ -36,16 +51,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={cn(
-          syne.variable,
-          clash.variable,
-          "antialiased overflow-x-hidden min-w-screen bg-[#070E02]"
-        )}
+        className={`${primary.variable}
+        ${clash.variable} ${syne.variable} ${secondary.variable} ${tertiary.variable} antialiased overflow-x-hidden min-h-screen relative`}
         suppressHydrationWarning
       >
-        <Provider>
-          {children}
-        </Provider>
+        <NextTopLoader color="#ffffff" showSpinner={false} />
+        <DesignSystemProvider>{children}</DesignSystemProvider>
       </body>
     </html>
   );
