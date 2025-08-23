@@ -41,7 +41,7 @@ export default function FooterSection() {
             <Link
               key={index}
               href={link.href}
-              className="text-muted-foreground hover:text-primary block duration-150 lowercase"
+              className="text-muted-foreground block duration-150 lowercase"
             >
               <span>{link.title}</span>
             </Link>
@@ -53,7 +53,7 @@ export default function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="X/Twitter"
-            className="text-muted-foreground hover:text-primary block"
+            className="text-muted-foreground block"
           >
             <svg
               className="size-6"
@@ -73,7 +73,7 @@ export default function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="LinkedIn"
-            className="text-muted-foreground hover:text-primary block"
+            className="text-muted-foreground block"
           >
             <svg
               className="size-6"
@@ -93,7 +93,7 @@ export default function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Facebook"
-            className="text-muted-foreground hover:text-primary block"
+            className="text-muted-foreground block"
           >
             <svg
               className="size-6"
@@ -113,7 +113,7 @@ export default function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Threads"
-            className="text-muted-foreground hover:text-primary block"
+            className="text-muted-foreground block"
           >
             <svg
               className="size-6"
@@ -138,7 +138,7 @@ export default function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Instagram"
-            className="text-muted-foreground hover:text-primary block"
+            className="text-muted-foreground block"
           >
             <svg
               className="size-6"
@@ -158,7 +158,7 @@ export default function FooterSection() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label="TikTok"
-            className="text-muted-foreground hover:text-primary block"
+            className="text-muted-foreground block"
           >
             <svg
               className="size-6"
