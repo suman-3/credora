@@ -20,6 +20,8 @@ export const Navbar = () => {
   const [menuState, setMenuState] = React.useState(false);
   const [isScrolled, setIsScrolled] = React.useState(false);
 
+  const authPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/login`;
+
   React.useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
@@ -140,7 +142,7 @@ export const Navbar = () => {
                   size="md"
                   className={cn(isScrolled && "lg:hidden")}
                 >
-                  <Link href="http://localhost:3002/auth">
+                  <Link href={authPageUrl}>
                     <span>Log In</span>
                   </Link>
                 </Button>
@@ -152,7 +154,7 @@ export const Navbar = () => {
                   variant="outline"
                   className={cn(isScrolled ? "lg:inline-flex" : "hidden")}
                 >
-                  <Link href="http://localhost:3002/auth">
+                  <Link href={authPageUrl}>
                     <span>Get Started</span>
                   </Link>
                 </Button>
