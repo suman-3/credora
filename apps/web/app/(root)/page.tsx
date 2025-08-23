@@ -6,6 +6,8 @@ import LogoCloud from "./_components/logo-cloude";
 import Works from "./_components/works";
 import CTASection from "./_components/cta";
 import { Testimonials } from "./_components/testimonials";
+import FooterSection from "./_components/footer";
+import Credora from "./_components/credora";
 
 export const metadata: Metadata = {
   title: {
@@ -23,6 +25,8 @@ export default function Home() {
       <Works/>
       <Testimonials />
       <CTASection />
+      <FooterSection />
+      <Credora/>
     </main>
   );
 }

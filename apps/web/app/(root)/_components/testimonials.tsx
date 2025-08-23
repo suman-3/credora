@@ -55,8 +55,8 @@ const ReviewCard = ({
   body: string;
 }) => {
   return (
-    <div className="h-full w-80 cursor-pointer border border-light/30">
-      <div className="p-4 border border-light/30 border-b">
+    <div className="h-full w-80 cursor-pointer border border-light/15">
+      <div className="p-4 border border-light/15 border-b">
         <p className="font-syne text-white">"{body}"</p>
       </div>
       <div className="flex justify-between">
@@ -65,7 +65,7 @@ const ReviewCard = ({
             className="rounded-full"
             width="32"
             height="32"
-            alt=""
+            alt={name}
             src={img}
           />
           <div className="flex flex-col">
@@ -75,7 +75,7 @@ const ReviewCard = ({
             <p className="font-medium text-white/60">{position}</p>
           </div>
         </div>
-        <div className="border border-light/30 border-l p-4 flex items-center justify-center">
+        <div className="border border-light/15 border-l p-4 flex items-center justify-center">
           <Image src={"/x.svg"} alt="x" height={30} width={30} />
         </div>
       </div>
@@ -86,7 +86,7 @@ const ReviewCard = ({
 export function Testimonials() {
   return (
     <div className="relative flex w-full max-w-screen-2xl mx-auto flex-col items-center justify-center overflow-hidden px-5 md:px-14 mt-20">
-        <div className="relative flex items-center justify-center">
+        <div className="relative flex items-center justify-center mb-10">
         <h1 className="text-5xl font-semibold font-syne mb-5 bg-gradient-to-r from-[#7FEE64] to-[#FFEA71] bg-clip-text text-transparent lowercase">
           Trusted Voices at Credora
         </h1>
