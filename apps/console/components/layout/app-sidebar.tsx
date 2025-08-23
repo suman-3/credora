@@ -106,37 +106,44 @@ export default function AppSidebar() {
 
   const filteredNavItems = React.useMemo(() => {
     if (isLoading || !user) return [];
-    
-    return navItems.map((item) => {
-      // Check if parent item is allowed for this role
-      if (item.roles && !item.roles.includes(user?.userType || "")) {
-        return null;
-      }
-      
-      // If item has children, filter them based on roles
-      if (item.items && item.items.length > 0) {
-        const filteredChildren = item.items.filter((subItem) => {
-          if (subItem.roles) {
-            return subItem.roles.includes(user?.userType || "");
-          }
-          return true;
-        });
-        
-        // Only return parent if it has accessible children
-        if (filteredChildren.length > 0) {
-          return { ...item, items: filteredChildren };
+
+    return navItems
+      .map((item) => {
+        // Check if parent item is allowed for this role
+        if (item.roles && !item.roles.includes(user?.userType || "")) {
+          return null;
         }
-        return null;
-      }
-      
-      return item;
-    }).filter(Boolean);
+
+        // If item has children, filter them based on roles
+        if (item.items && item.items.length > 0) {
+          const filteredChildren = item.items.filter(
+            (subItem: { roles: string | string[] }) => {
+              if (subItem.roles) {
+                return subItem.roles.includes(user?.userType || "");
+              }
+              return true;
+            }
+          );
+
+          // Only return parent if it has accessible children
+          if (filteredChildren.length > 0) {
+            return { ...item, items: filteredChildren };
+          }
+          return null;
+        }
+
+        return item;
+      })
+      .filter(Boolean);
   }, [isLoading, user]);
 
   return (
     <Sidebar collapsible="icon">
       <SidebarHeader>
-        <OrgSwitcher role={user?.userType || "ANONYMOUS"} isLoading={isLoading} />
+        <OrgSwitcher
+          role={user?.userType || "ANONYMOUS"}
+          isLoading={isLoading}
+        />
       </SidebarHeader>
 
       <SidebarContent className="overflow-x-hidden">
@@ -180,22 +187,24 @@ export default function AppSidebar() {
                       </CollapsibleTrigger>
                       <CollapsibleContent>
                         <SidebarMenuSub>
-                          {item.items?.map((subItem) => {
-                            const SubIcon = getIcon(subItem.icon || "");
-                            return (
-                              <SidebarMenuSubItem key={subItem.title}>
-                                <SidebarMenuSubButton
-                                  asChild
-                                  isActive={pathname === subItem.url}
-                                >
-                                  <Link href={subItem.url}>
-                                    {SubIcon && <SubIcon />}
-                                    <span>{subItem.title}</span>
-                                  </Link>
-                                </SidebarMenuSubButton>
-                              </SidebarMenuSubItem>
-                            );
-                          })}
+                          {item.items?.map(
+                            (subItem: (typeof item.items)[0]) => {
+                              const SubIcon = getIcon(subItem.icon || "");
+                              return (
+                                <SidebarMenuSubItem key={`${subItem.title}-${subItem.url}`}>
+                                  <SidebarMenuSubButton
+                                    asChild
+                                    isActive={pathname === subItem.url}
+                                  >
+                                    <Link href={subItem.url}>
+                                      {SubIcon && <SubIcon />}
+                                      <span>{subItem.title}</span>
+                                    </Link>
+                                  </SidebarMenuSubButton>
+                                </SidebarMenuSubItem>
+                              );
+                            }
+                          )}
                         </SidebarMenuSub>
                       </CollapsibleContent>
                     </SidebarMenuItem>

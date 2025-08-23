@@ -12,13 +12,14 @@ export const FileApi = axios.create({
     Authorization: `Bearer ${token}`,
   },
 });
-export const AuthApi = axios.create({
-  baseURL: `${API_URL}/auth`,
+
+
+export const PublicInstance = axios.create({
+  baseURL: `${API_URL}/api`,
   headers: {
     'Content-Type': 'application/json',
   },
 });
-
 export const ApiInstance = axios.create({
   baseURL: `${API_URL}/api`,
   headers: {

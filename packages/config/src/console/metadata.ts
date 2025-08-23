@@ -17,6 +17,10 @@ export const siteConfig = {
     url: "https://console.credora.tech",
     auth: {
         title: "Authentication | Credora",
+        verify:{
+            title: "Verification | Credora",
+            description: "Confirm your identity to access your blockchain credentials.",
+        }
     },
     dashboard:{
         title: "Dashboard | Credora Console",
