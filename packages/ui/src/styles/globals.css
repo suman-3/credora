@@ -77,6 +77,26 @@
   /* custom animations */
   --animate-ripple: ripple var(--duration, 2s) ease calc(var(--i, 0) * 0.2s) infinite;
   --animate-shiny-text: shiny-text 8s infinite;
+
+    --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+ 
+  @keyframes marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  @keyframes marquee-vertical {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(calc(-100% - var(--gap)));
+    }
+  }
 }
 
 /* ===========================
@@ -185,7 +205,7 @@
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground lowercase;
   }
 
   .hero-bg {
@@ -205,4 +225,15 @@
     background: url("/card-bg.png") bottom/cover no-repeat;
     background-blend-mode: normal;
   }
+  .card4-bg {
+    background: url("/overlay.png") bottom/cover no-repeat;
+    background-blend-mode: normal;
+  }
+  .cta-bg {
+    background: url("/cta-bg.png");
+    background-size: 110%;
+    background-repeat: no-repeat;
+    background-position: top;
+  }
+
 }
