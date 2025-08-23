@@ -140,7 +140,7 @@ export const Navbar = () => {
                   size="md"
                   className={cn(isScrolled && "lg:hidden")}
                 >
-                  <Link href="http://localhost:3002/auth">
+                  <Link href="/auth">
                     <span>Log In</span>
                   </Link>
                 </Button>
@@ -152,7 +152,7 @@ export const Navbar = () => {
                   variant="outline"
                   className={cn(isScrolled ? "lg:inline-flex" : "hidden")}
                 >
-                  <Link href="http://localhost:3002/auth">
+                  <Link href="/auth">
                     <span>Get Started</span>
                   </Link>
                 </Button>

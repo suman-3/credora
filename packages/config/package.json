@@ -12,6 +12,7 @@
     "typescript": "^5.9.2"
   },
   "exports": {
-     "./web/*": "./src/web/*.ts"
+     "./web/*": "./src/web/*.ts",
+     "./console/*": "./src/console/*.ts"
   }
 }
