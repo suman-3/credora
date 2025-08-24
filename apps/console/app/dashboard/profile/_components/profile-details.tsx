@@ -2,7 +2,12 @@
 
 import React from "react";
 import LoaderPage from "@/components/shared/loader-page";
-import { Card, CardContent, CardHeader, CardTitle } from "@workspace/ui/components/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@workspace/ui/components/card";
 import { Button } from "@workspace/ui/components/button";
 import { ApiInstance } from "@/lib/apis";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -24,6 +29,7 @@ import { Textarea } from "@workspace/ui/components/textarea";
 import { Loader } from "lucide-react";
 import { IUser } from "@/types/objects";
 import { ImageUploader } from "@/components/shared/image-uploader";
+import { useAuth } from "@/hooks/auth/use-auth";
 
 interface ApiResponse {
   success: boolean;
@@ -43,6 +49,8 @@ type FormData = z.infer<typeof formSchema>;
 
 const ProfileDetails = () => {
   const queryClient = useQueryClient();
+
+  const { setUser } = useAuth();
 
   const {
     data: user,
@@ -74,6 +82,10 @@ const ProfileDetails = () => {
 
   const userData = user?.user;
 
+  if (userData) {
+    setUser(userData);
+  }
+
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -86,12 +98,11 @@ const ProfileDetails = () => {
   // Update form values when userData is available
   React.useEffect(() => {
     if (userData) {
-      const defaultImage =
-        `https://avatar.vercel.sh/${userData.name || "User"}.svg?text=${(
-          userData.name || "U"
-        )
-          .slice(0, 2)
-          .toUpperCase()}`;
+      const defaultImage = `https://avatar.vercel.sh/${userData.name || "User"}.svg?text=${(
+        userData.name || "U"
+      )
+        .slice(0, 2)
+        .toUpperCase()}`;
 
       form.reset({
         name: userData.name || "",
@@ -227,9 +238,9 @@ const ProfileDetails = () => {
                 {updateProfileMutation.isPending
                   ? "Updating"
                   : "Update Profile"}
-                  {updateProfileMutation.isPending && (
-                    <Loader className="ml-2 h-4 w-4 animate-spin" />
-                  )}
+                {updateProfileMutation.isPending && (
+                  <Loader className="ml-2 h-4 w-4 animate-spin" />
+                )}
               </Button>
             </div>
           </form>

@@ -16,10 +16,13 @@ import { Label } from "@workspace/ui/components/label"; // assuming exists
 import { Textarea } from "@workspace/ui/components/textarea"; // assuming exists
 import { ApiInstance } from "@/lib/apis";
 import { toast } from "sonner";
+import { useAuth } from "@/hooks/auth/use-auth";
+import { SidebarTrigger } from "@workspace/ui/components/sidebar";
 
 export default function Header() {
   const [open, setOpen] = React.useState(false);
   const [website, setWebsite] = React.useState("");
+  const { user } = useAuth();
   const [description, setDescription] = React.useState("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -36,7 +39,7 @@ export default function Header() {
 
     setOpen(false);
   };
-8
+  8;
   return (
     <header
       suppressHydrationWarning
@@ -44,59 +47,62 @@ export default function Header() {
     >
       <div className="flex items-center gap-2 px-4">
         <Separator orientation="vertical" className="mr-2 h-4" />
+        <SidebarTrigger />
         <Breadcrumbs />
       </div>
 
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogTrigger asChild>
-          <Button className="mr-6">Register on Blockchain</Button>
-        </DialogTrigger>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Register on Blockchain</DialogTitle>
-            <DialogDescription>
-              Enter the website and a short description. On submit, we will log
-              the values.
-            </DialogDescription>
-          </DialogHeader>
+      {(user?.userType !== "user" && user?.userType !== "verifier") && (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger asChild>
+            <Button className="mr-6">Register on Blockchain</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Register on Blockchain</DialogTitle>
+              <DialogDescription>
+                Enter the website and a short description. On submit, we will
+                log the values.
+              </DialogDescription>
+            </DialogHeader>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid gap-2">
-              <Label htmlFor="website">Website</Label>
-              <Input
-                id="website"
-                type="url"
-                placeholder="https://example.com"
-                value={website}
-                onChange={(e) => setWebsite(e.target.value)}
-                required
-              />
-            </div>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div className="grid gap-2">
+                <Label htmlFor="website">Website</Label>
+                <Input
+                  id="website"
+                  type="url"
+                  placeholder="https://example.com"
+                  value={website}
+                  onChange={(e) => setWebsite(e.target.value)}
+                  required
+                />
+              </div>
 
-            <div className="grid gap-2">
-              <Label htmlFor="description">Description</Label>
-              <Textarea
-                id="description"
-                placeholder="Brief description..."
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                required
-              />
-            </div>
+              <div className="grid gap-2">
+                <Label htmlFor="description">Description</Label>
+                <Textarea
+                  id="description"
+                  placeholder="Brief description..."
+                  value={description}
+                  onChange={(e) => setDescription(e.target.value)}
+                  required
+                />
+              </div>
 
-            <div className="flex justify-end gap-2 pt-2">
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() => setOpen(false)}
-              >
-                Cancel
-              </Button>
-              <Button type="submit">Submit</Button>
-            </div>
-          </form>
-        </DialogContent>
-      </Dialog>
+              <div className="flex justify-end gap-2 pt-2">
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setOpen(false)}
+                >
+                  Cancel
+                </Button>
+                <Button type="submit">Submit</Button>
+              </div>
+            </form>
+          </DialogContent>
+        </Dialog>
+      )}
 
       {/* <div className="flex items-center gap-2 px-4">
         <ModeToggle />

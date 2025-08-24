@@ -113,7 +113,7 @@ const OrganizerPageDetails = () => {
     onSuccess: () => {
       toast.success("Application submitted successfully!");
       // Optional: Reset form or redirect
-      router.replace("/dashboard/profile");
+      router.replace("/dashboard/applications");
       setFormData({
         issuerType: "",
         description: "",
