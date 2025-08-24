@@ -1,13 +1,76 @@
 ---
-title: Hello World
-description: Your first document
+title: Platform Flows
+description: Core platform user and issuer flows for onboarding, dashboard, certificate issuance and sharing.
 ---
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+![Landing Page](/hero/issuerflow.png)
 
-## What is Next?
+## Overview
 
-<Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
-</Cards>
+The Landing Page serves as the primary entry point for the Credora platform, welcoming both users (certificate recipients) and issuers (institutions/organizations) who want to interact with our digital certificate ecosystem.
+
+## Features
+
+### User Entry Point
+- **Clear Value Proposition**: Immediately communicates the platform's purpose and benefits
+- **User Registration**: Direct access for individuals looking to receive and manage digital certificates
+- **Intuitive Navigation**: Easy-to-understand interface guiding users to the next steps
+
+### Issuer Entry Point
+- **Institutional Access**: Dedicated pathway for organizations wanting to issue certificates
+- **Professional Interface**: Tailored messaging for educational institutions and certified organizations
+- **Quick Onboarding**: Streamlined process to get issuers started quickly
+
+## Key Components
+
+### Navigation Header
+- Platform logo and branding
+- Clear distinction between "User" and "Issuer" paths
+- Contact and support information
+
+### Hero Section
+- **Primary CTA**: "Get Started" buttons for both user types
+- **Trust Indicators**: Security badges and verification symbols
+- **Platform Statistics**: Number of certificates issued, verified institutions, etc.
+
+### Feature Highlights
+- **Secure Wallet Integration**: Blockchain-based authentication
+- **Instant Verification**: Real-time certificate validation
+- **Easy Sharing**: Simple certificate sharing capabilities
+- **Institution Network**: Connected verified issuers
+
+## User Journey from Landing Page
+
+### For Users
+1. User clicks "Get Started as User"
+2. Redirected to authentication flow
+3. Wallet connection process begins
+
+### For Issuers
+1. Issuer clicks "Get Started as Issuer" 
+2. Redirected to issuer authentication flow
+3. Institutional verification process begins
+
+## Design Principles
+
+- **Trust-First**: Security and verification emphasized prominently
+- **Accessibility**: Clear navigation for users of all technical levels
+- **Professional**: Clean, modern design that instills confidence
+- **Responsive**: Optimized for desktop, tablet, and mobile devices
+
+## Technical Implementation
+
+### Authentication Routes
+- `/auth/user` - User authentication flow
+- `/auth/issuer` - Issuer authentication flow
+
+### Key Metrics Tracking
+- Landing page conversion rates
+- User vs Issuer registration ratios
+- Drop-off points in the funnel
+
+## Next Steps
+
+After landing page interaction:
+- **Users**: Proceed to [User Authentication](/docs/user-authentication)
+- **Issuers**: Proceed to [Issuer Authentication](/docs/issuer-authentication)

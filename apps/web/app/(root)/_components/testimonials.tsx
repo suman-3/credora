@@ -3,40 +3,40 @@ import Image from "next/image";
 
 const reviews = [
   {
-    name: "Jack",
-    position: "CEO, Company",
+    name: "Xavier Nikolov",
+    position: "CEO, texas",
     body: "I've never seen anything like this before. It's amazing. I love it.",
-    img: "https://avatar.vercel.sh/jack",
+    img: "/testimonials/male1.png",
   },
   {
-    name: "Jill",
-    position: "CTO, Company",
+    name: "Tech Nerd",
+    position: "CTO, tcs",
     body: "I don't know what to say. I'm speechless. This is amazing.",
-    img: "https://avatar.vercel.sh/jill",
+    img: "/testimonials/female1.png",
   },
   {
-    name: "John",
-    position: "SDE, Company",
+    name: "kitze",
+    position: "SDE, amazon",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/john",
+    img: "/testimonials/female2.png",
   },
   {
-    name: "Jane",
-    position: "SDE-2, Company",
+    name: "Dax",
+    position: "SDE-2, uber",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jane",
+    img: "/testimonials/male3.png",
   },
   {
-    name: "Jenny",
-    position: "SDE-1, Companyy",
+    name: "Vaibhav uber",
+    position: "SDE-1, uber",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/jenny",
+    img: "/testimonials/male3.png",
   },
   {
-    name: "James",
-    position: "LEAD, Companys",
+    name: "MAx Andrew",
+    position: "LEAD, meta",
     body: "I'm at a loss for words. This is amazing. I love it.",
-    img: "https://avatar.vercel.sh/james",
+    img: "/testimonials/male4.png",
   },
 ];
 
