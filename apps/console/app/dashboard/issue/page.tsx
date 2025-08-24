@@ -3,6 +3,7 @@ import PageContainer from "@/components/layout/page-container";
 import { DataTableSkeleton } from "@/components/table/data-table-skeleton";
 import { Separator } from "@workspace/ui/components/separator";
 import React, { Suspense } from "react";
+import Issue from "./_components/issue";
 
 const IssuePage = () => {
   return (
@@ -21,7 +22,7 @@ const IssuePage = () => {
             <DataTableSkeleton columnCount={5} rowCount={8} filterCount={2} />
           }
         >
-          hello
+          <Issue/>
         </Suspense>
       </div>
     </PageContainer>

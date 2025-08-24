@@ -11,7 +11,7 @@ const Works = () => {
           understanding credora better
         </h1>
       </div>
-      <div className="mx-auto w-full">
+      <div className="mx-auto w-full">  
         <div className="relative flex flex-col gap-3">
           <div className="relative z-10 grid grid-cols-6 gap-3">
             <Card className="border-[#7FEE64]/80 bg-[#070E02] card-bg relative col-span-full flex overflow-hidden lg:col-span-2">
@@ -55,7 +55,7 @@ const Works = () => {
               <CardContent className="pt-6 flex flex-col items-center">
                 <Image src={"/group1.png"} alt="Group 1" width={100} height={100} />
                 <div className="relative z-10 mt-14 space-y-2 text-center">
-                  <h2 className="text-lg font-syne text-white font-medium transition">
+                  <h2 className="text-2xl font-syne text-white font-medium transition">
                     credentials visualization
                   </h2>
                   <p className="text-white font-clash">
