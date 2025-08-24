@@ -53,7 +53,7 @@ const credentialSchema = z.object({
     gpa: z.number().min(0).max(10).optional(),
     credits: z.number().min(0).optional(),
     skills: z.array(z.string()).optional(),
-    imageUrl: z.string().min(1, "Image is required"), // Keep as required
+    imageUrl: z.string().min(1, "Image is required"),
   }),
 });
 
@@ -115,8 +115,6 @@ const Issue = () => {
     },
     onSuccess: () => {
       toast.success("Issue submitted successfully!");
-
-      // Reset form and state after successful submission
       reset();
       setSkills([]);
       setUploadedImageUrls([]);
@@ -191,21 +189,16 @@ const onSubmit = async (data: CredentialFormData) => {
   };
 
   const handleFileSelect = (urls: string[]) => {
-    console.log("Files selected:", urls); // Debug log
+    console.log("Files selected:", urls);
     setUploadedImageUrls(urls);
     setFileUploading(false);
-
-    // THIS IS THE KEY FIX - Update the form's imageUrl field
     if (urls.length > 0 && urls[0]) {
       setValue("credentialData.imageUrl", urls[0]);
     }
   };
-
-  // Fix 2: Update handleFileRemove to clear the form value properly
   const handleFileRemove = () => {
     setUploadedImageUrls([]);
     setSelectedFile(null);
-    // Clear the form field too
     setValue("credentialData.imageUrl", "");
   };
 
