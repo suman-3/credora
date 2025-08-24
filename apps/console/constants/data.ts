@@ -27,4 +27,11 @@ export const navItems: NavItem[] = [
     isActive: false,
     roles: ["institution", "user", "company"],
   },
+  {
+    title: "Issue a Certificate",
+    url: "/dashboard/issue",
+    icon: "IconPennant",
+    isActive: false,
+    roles: ["institution", "company"],
+  },
 ];
