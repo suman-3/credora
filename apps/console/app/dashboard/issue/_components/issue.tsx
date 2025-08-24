@@ -38,7 +38,7 @@ import { toast } from "sonner";
 
 const credentialSchema = z.object({
   recipientAddress: z.string().min(1, "Recipient address is required"),
-  recipientName: z.string(),
+  recipientName: z.string().optional(),
   credentialData: z.object({
     title: z.string().min(1, "Title is required"),
     description: z.string().optional(),
@@ -53,7 +53,7 @@ const credentialSchema = z.object({
     gpa: z.number().min(0).max(10).optional(),
     credits: z.number().min(0).optional(),
     skills: z.array(z.string()).optional(),
-    imageUrl: z.string(),
+    imageUrl: z.string().min(1, "Image is required"), // Keep as required
   }),
 });
 
@@ -64,7 +64,7 @@ const Issue = () => {
   const [skills, setSkills] = useState<string[]>([]);
   const [newSkill, setNewSkill] = useState("");
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
-  const [fileUploading, setFileUploading] = useState(false)
+  const [fileUploading, setFileUploading] = useState(false);
 
   const {
     register,
@@ -76,25 +76,35 @@ const Issue = () => {
   } = useForm<CredentialFormData>({
     resolver: zodResolver(credentialSchema),
     defaultValues: {
+      recipientAddress: "",
+      recipientName: "",
       credentialData: {
+        title: "",
+        description: "",
+        subject: "",
+        grade: "",
+        gpa: undefined,
+        credits: undefined,
         skills: [],
+        imageUrl: "",
       },
     },
   });
 
   const credentialType = watch("credentialData.credentialType");
 
-    const { mutate, isPending } = useMutation({
-    mutationFn: async (
-        data: CredentialFormData
-    ) => {
+  const { mutate, isPending } = useMutation({
+    mutationFn: async (data: CredentialFormData) => {
       try {
+        console.log("API call with data:", data);
+
         const response = await ApiInstance.post("/credentials/issue", {
-          data
+          data,
         });
 
         return response.data;
       } catch (error: any) {
+        console.error("API Error:", error);
         if (error.response?.status === 500) {
           throw new Error(
             "Server error occurred while submitting. Please try again."
@@ -105,8 +115,16 @@ const Issue = () => {
     },
     onSuccess: () => {
       toast.success("Issue submitted successfully!");
+
+      // Reset form and state after successful submission
+      reset();
+      setSkills([]);
+      setUploadedImageUrls([]);
+      setSelectedFile(null);
+      setNewSkill("");
     },
     onError: (error: any) => {
+      console.error("Mutation Error:", error);
       const errorMessage =
         error.response?.data?.message ||
         error.message ||
@@ -115,34 +133,30 @@ const Issue = () => {
     },
   });
 
-  const onSubmit = async (data: CredentialFormData) => {
-    try {
-      let imageUrl = "";
-      if (uploadedImageUrls.length > 0) {
-        imageUrl = uploadedImageUrls[0] || "";
+
+const onSubmit = async (data: CredentialFormData) => {
+  console.log("Form submitted with data:", data);
+  console.log("Form errors:", errors);
+  
+  try {
+    const formattedData = {
+      ...data,
+      credentialData: {
+        ...data.credentialData,
+        skills: skills,
       }
-      if (selectedFile) {
-        const formData = new FormData();
-        formData.append("file", selectedFile);
-        console.log("Uploading file:", selectedFile.name);
-        imageUrl = URL.createObjectURL(selectedFile);
+    };
 
-      }
+    console.log("Final data being sent to API:", formattedData);
+    
+    mutate(formattedData);
+    
+  } catch (error) {
+    console.error("Error in onSubmit:", error);
+    toast.error("Error preparing form data");
+  }
+};
 
-      const formattedData = {
-        ...data,
-        credentialData: {
-          ...data.credentialData,
-          skills: skills,
-          imageUrl: imageUrl,
-        }
-      };
-
-      mutate(formattedData);
-    } catch (error) {
-      console.error("Error submitting form:", error);
-    }
-  };
 
   const addSkill = () => {
     if (newSkill.trim() && !skills.includes(newSkill.trim())) {
@@ -177,13 +191,22 @@ const Issue = () => {
   };
 
   const handleFileSelect = (urls: string[]) => {
+    console.log("Files selected:", urls); // Debug log
     setUploadedImageUrls(urls);
     setFileUploading(false);
+
+    // THIS IS THE KEY FIX - Update the form's imageUrl field
+    if (urls.length > 0 && urls[0]) {
+      setValue("credentialData.imageUrl", urls[0]);
+    }
   };
 
+  // Fix 2: Update handleFileRemove to clear the form value properly
   const handleFileRemove = () => {
-    setUploadedImageUrls([""]);
-
+    setUploadedImageUrls([]);
+    setSelectedFile(null);
+    // Clear the form field too
+    setValue("credentialData.imageUrl", "");
   };
 
   return (
@@ -349,7 +372,7 @@ const Issue = () => {
 
                 <div className="space-y-2">
                   <Label className="text-sm font-medium">
-                    Credential Image
+                    Credential Image *
                   </Label>
                   <FileUploader
                     onChange={handleFileSelect}
@@ -359,8 +382,13 @@ const Issue = () => {
                     placeholder="Choose image file..."
                     disabled={fileUploading}
                   />
+                  {errors.credentialData?.imageUrl && (
+                    <p className="text-sm text-red-500">
+                      {errors.credentialData.imageUrl.message}
+                    </p>
+                  )}
                   <p className="text-sm text-gray-500">
-                    Upload an image to represent this credential (optional)
+                    Upload an image to represent this credential (required)
                   </p>
                 </div>
               </div>
@@ -488,10 +516,14 @@ const Issue = () => {
                 <Button
                   type="submit"
                   className="flex items-center gap-2"
-                  disabled={isPending}
+                  disabled={isPending || fileUploading}
                 >
                   {credentialType && getCredentialIcon(credentialType)}
-                  {isPending ? "Processing..." : "Issue Credential"}
+                  {fileUploading
+                    ? "Uploading image..."
+                    : isPending
+                      ? "Processing..."
+                      : "Issue Credential"}
                 </Button>
               </div>
             </form>
