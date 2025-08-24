@@ -1,8 +1,8 @@
-import { Heading } from '@/components/heading'
-import PageContainer from '@/components/layout/page-container'
-import { DataTableSkeleton } from '@/components/table/data-table-skeleton'
-import { Separator } from '@workspace/ui/components/separator'
-import React, { Suspense } from 'react'
+import { Heading } from "@/components/heading";
+import PageContainer from "@/components/layout/page-container";
+import { DataTableSkeleton } from "@/components/table/data-table-skeleton";
+import { Separator } from "@workspace/ui/components/separator";
+import React, { Suspense } from "react";
 
 const IssuePage = () => {
   return (
@@ -21,11 +21,11 @@ const IssuePage = () => {
             <DataTableSkeleton columnCount={5} rowCount={8} filterCount={2} />
           }
         >
-          <IssuePage />
+          hello
         </Suspense>
       </div>
     </PageContainer>
-  )
-}
+  );
+};
 
-export default IssuePage
+export default IssuePage;
