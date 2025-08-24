@@ -5,7 +5,7 @@ import Image from "next/image";
 
 const Works = () => {
   return (
-    <div className="w-full max-w-screen-2xl px-5 md:px-14 mx-auto flex flex-col items-center gap-10">
+    <div id="features" className="w-full max-w-screen-2xl px-5 md:px-14 mx-auto flex flex-col items-center gap-10">
       <div className="relative flex items-center justify-center">
         <h1 className="text-5xl font-semibold font-syne mb-5 bg-gradient-to-r from-[#7FEE64] to-[#FFEA71] bg-clip-text text-transparent">
           understanding credora better
@@ -43,11 +43,10 @@ const Works = () => {
                 <Image src={"/fingerprint.svg"} alt="Group 1" width={100} height={100} />
                 <div className="relative z-10 mt-6 space-y-2 text-center">
                   <h2 className="text-2xl font-semibold transition text-white font-syne">
-                    Secure by default
+                    identity verification
                   </h2>
                   <p className="text-white/90 font-clash">
-                    Provident fugit and vero voluptate. magnam magni doloribus
-                    dolores voluptates a sapiente.
+                    Credora links credentials directly to verified identities, eliminating fraud and ensuring trust between learners, employers, and institutions.
                   </p>
                 </div>
               </CardContent>
@@ -57,11 +56,10 @@ const Works = () => {
                 <Image src={"/group1.png"} alt="Group 1" width={100} height={100} />
                 <div className="relative z-10 mt-14 space-y-2 text-center">
                   <h2 className="text-lg font-syne text-white font-medium transition">
-                    Faster than light
+                    credentials visualization
                   </h2>
                   <p className="text-white font-clash">
-                    Provident fugit vero voluptate. magnam magni doloribus
-                    dolores voluptates inventore nisi.
+                    View, organize, and validate credentials in a clear, tamper-proof format.
                   </p>
                 </div>
               </CardContent>

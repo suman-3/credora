@@ -11,9 +11,8 @@ import { motion } from "framer-motion";
 const menuItems = [
   { name: "_Hello", href: `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/login` },
   { name: "Docs", href: `${process.env.NEXT_PUBLIC_DOCS_URL}/docs` },
-  { name: "Connect", href: `${process.env.NEXT_PUBLIC_CONSOLE_URL}/dashboard/issuer` },
-  { name: "Pricing", href: "#link" },
-  { name: "Community", href: "#link" },
+  { name: "Features", href: "#features" },
+  { name: "Testimonials", href: "#testimonials" },
 ];
 
 export const Navbar = () => {
@@ -30,6 +29,98 @@ export const Navbar = () => {
     };
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Smooth scroll handler for hash links
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    // Only handle hash links (internal page sections)
+    if (href.startsWith('#')) {
+      e.preventDefault();
+      
+      const targetId = href.substring(1);
+      const targetElement = document.getElementById(targetId);
+      
+      if (targetElement) {
+        // Close mobile menu if open
+        setMenuState(false);
+        
+        // Calculate offset to account for fixed navbar
+        const navbarHeight = 80; // Adjust this based on your navbar height
+        const elementPosition = targetElement.getBoundingClientRect().top;
+        const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+
+        window.scrollTo({
+          top: offsetPosition,
+          behavior: 'smooth'
+        });
+
+        // Update URL hash after scroll completes
+        setTimeout(() => {
+          history.pushState(null, '', href);
+        }, 100);
+      }
+    }
+  };
+
+  // Enhanced Link component that handles smooth scrolling
+  const SmoothLink = ({ 
+    href, 
+    children, 
+    className,
+    ...props 
+  }: { 
+    href: string; 
+    children: React.ReactNode; 
+    className?: string;
+    [key: string]: any;
+  }) => {
+    const isHashLink = href.startsWith('#');
+    
+    if (isHashLink) {
+      return (
+        <a
+          href={href}
+          onClick={(e) => handleSmoothScroll(e, href)}
+          className={className}
+          {...props}
+        >
+          {children}
+        </a>
+      );
+    }
+    
+    // Use Next.js Link for external/internal page navigation
+    return (
+      <Link href={href} className={className} {...props}>
+        {children}
+      </Link>
+    );
+  };
+
+  React.useEffect(() => {
+    // Add CSS for smooth scrolling as fallback
+    document.documentElement.style.scrollBehavior = 'smooth';
+    
+    // Handle initial page load with hash
+    if (window.location.hash) {
+      setTimeout(() => {
+        const targetElement = document.getElementById(window.location.hash.substring(1));
+        if (targetElement) {
+          const navbarHeight = 80;
+          const elementPosition = targetElement.getBoundingClientRect().top;
+          const offsetPosition = elementPosition + window.pageYOffset - navbarHeight;
+          
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: 'smooth'
+          });
+        }
+      }, 500); // Delay to ensure page is fully loaded
+    }
+
+    return () => {
+      document.documentElement.style.scrollBehavior = 'auto';
+    };
   }, []);
 
   return (
@@ -58,7 +149,7 @@ export const Navbar = () => {
           <div
             className={cn(
               "relative flex flex-wrap items-center justify-between gap-6 py-3 transition-[padding,margin] duration-300 lg:gap-0 lg:py-4",
-              // Slightly reduce vertical padding when scrolled for a “shrink” effect
+              // Slightly reduce vertical padding when scrolled for a "shrink" effect
               isScrolled && "py-2 lg:py-3"
             )}
           >
@@ -88,12 +179,12 @@ export const Navbar = () => {
               <ul className="flex gap-8 text-sm">
                 {menuItems.map((item, index) => (
                   <li key={index}>
-                    <Link
+                    <SmoothLink
                       href={item.href}
-                      className="block text-white  lowercase font-semibold tracking-wide font-clash text-[16px] transition-colors duration-150 hover:text-light/70"
+                      className="block text-white lowercase font-semibold tracking-wide font-clash text-[16px] transition-colors duration-150 hover:text-light/70"
                     >
                       <span>{item.name}</span>
-                    </Link>
+                    </SmoothLink>
                   </li>
                 ))}
               </ul>
@@ -115,12 +206,12 @@ export const Navbar = () => {
                 <ul className="space-y-6 text-base">
                   {menuItems.map((item, index) => (
                     <li key={index}>
-                      <Link
+                      <SmoothLink
                         href={item.href}
                         className="block text-white font-semibold tracking-wide font-clash text-sm transition-colors duration-150 hover:text-white"
                       >
                         <span>{item.name}</span>
-                      </Link>
+                      </SmoothLink>
                     </li>
                   ))}
                 </ul>
@@ -132,7 +223,7 @@ export const Navbar = () => {
                   asChild
                   size="md"
                   variant="outline"
-                  // Hide these on large when scrolled, to only show the single “Get Started”
+                  // Hide these on large when scrolled, to only show the single "Get Started"
                   className={cn(isScrolled && "lg:hidden")}
                 >
                   <Link href={organizerPageUrl}>
