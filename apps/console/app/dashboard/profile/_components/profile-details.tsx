@@ -82,9 +82,13 @@ const ProfileDetails = () => {
 
   const userData = user?.user;
 
-  if (userData) {
-    setUser(userData);
-  }
+  console.log(userData);
+
+  React.useEffect(() => {
+    if (userData) {
+      setUser(userData);
+    }
+  }, [userData, setUser]);
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
