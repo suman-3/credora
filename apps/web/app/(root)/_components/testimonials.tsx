@@ -55,7 +55,7 @@ const ReviewCard = ({
   body: string;
 }) => {
   return (
-    <div className="h-full w-80 cursor-pointer border border-light/15">
+    <div id="testimonials" className="h-full w-80 cursor-pointer border border-light/15">
       <div className="p-4 border border-light/15 border-b">
         <p className="font-syne text-white">"{body}"</p>
       </div>
