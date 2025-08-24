@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 
 const HeroSection = () => {
   const router = useRouter();
+    const authPageUrl = `${process.env.NEXT_PUBLIC_CONSOLE_URL}/auth/login`;
   return (
     <MaxWrapper className="w-full">
       <div className="w-full relative  min-h-svh md:min-h-lvh hero-bg flex items-center justify-center overflow-hidden xl:max-w-screen-2xl mx-auto">
@@ -59,7 +60,7 @@ const HeroSection = () => {
           >
             <AnimatedButton
               onClick={() => {
-                router.push("/auth");
+                router.push(authPageUrl);
               }}
               className="font-clash font-semibold !tracking-wider w-52 lowercase"
             >

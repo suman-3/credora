@@ -10,7 +10,7 @@ export interface IUser {
     website?: string;
     documents?: string[];
   };
-  userType: 'user' | 'institution' |'company' | 'verifier';
+  userType: 'user' | 'institution' | 'company' | 'verifier';
   isVerified: boolean;
   isAdmin?: boolean;
   credentialsOwned?: ICredentialOwnership[];
@@ -18,6 +18,14 @@ export interface IUser {
     notifications: boolean;
     publicProfile: boolean;
   };
+  blockchain?: {
+    isRegistered: boolean;
+    registrationTxHash?: string;
+    registrationBlockNumber?: number;
+    registeredAt?: Date;
+  };
+  otp?: string;
+  otpExpiry?: Date;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -28,4 +36,16 @@ export interface ICredentialOwnership {
   credentialType: string;
   issueDate: Date;
   onChain: boolean;
+}
+
+export interface IOrganisationApplication extends Document {
+  id: string;
+  user: IUser;
+  type: 'institution' | 'company';
+  description: string;
+  document: string;
+  status: 'pending' | 'approved' | 'rejected';
+  rejectionReason?: string;
+  createdAt: Date;
+  updatedAt: Date;
 }

@@ -15,12 +15,12 @@ import { toast } from "sonner";
 
 const VerifyPage = () => {
   const searchparams = useSearchParams();
-  const { setUser } = useAuth();
+  const { setUser, user, login } = useAuth();
   const router = useRouter();
 
   const token = searchparams.get("token");
 
-  const { mutate, isPending , error} = useMutation({
+  const { mutate, isPending, error } = useMutation({
     mutationFn: async (token: string) => {
       const res = await PublicInstance.get(`/auth/verify?token=${token}`);
       if (res.status < 200 || res.status >= 300) {
@@ -30,7 +30,11 @@ const VerifyPage = () => {
     },
     onSuccess: (data) => {
       toast.success("Account verified successfully");
-      setUser(data.user);
+      if (user) {
+        login(data.user, data.token);
+      } else {
+        setUser(data.user);
+      }
       router.replace("/dashboard");
     },
     onError: () => {
@@ -46,9 +50,7 @@ const VerifyPage = () => {
 
   return (
     <MaxWrapper className="w-full bg-transparent">
-      <div
-        className="bg-card m-auto h-fit w-full max-w-md rounded-[calc(var(--radius)+.125rem)] border p-0.5 shadow-md dark:[--color-muted:var(--color-zinc-900)]"
-      >
+      <div className="bg-card m-auto h-fit w-full max-w-md rounded-[calc(var(--radius)+.125rem)] border p-0.5 shadow-md dark:[--color-muted:var(--color-zinc-900)]">
         <div className="p-8 pb-8">
           <div>
             <Link href="/" aria-label="go home">
@@ -71,10 +73,14 @@ const VerifyPage = () => {
                 Verification Failed
               </h1>
               <p className="text-sm text-muted-foreground font-clash text-center lowercase">
-                There was an error verifying your identity. Please try again or contact support.
+                There was an error verifying your identity. Please try again or
+                contact support.
               </p>
               <Link className="w-full" href="/auth/login">
-                <Button className="w-full mt-2 cursor-pointer font-clash lowercase" variant="destructive">
+                <Button
+                  className="w-full mt-2 cursor-pointer font-clash lowercase"
+                  variant="destructive"
+                >
                   Go To Login
                 </Button>
               </Link>

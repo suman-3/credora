@@ -21,7 +21,7 @@ import {
   PopoverTrigger
 } from '@workspace/ui/components/popover';
 import { Separator } from '@workspace/ui/components/separator';
-import { cn } from '@/lib/utils';
+import { cn } from '@workspace/ui/lib/utils';
 import * as React from 'react';
 import { CheckIcon } from '@radix-ui/react-icons';
 

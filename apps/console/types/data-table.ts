@@ -32,7 +32,7 @@ export interface ExtendedColumnSort<TData> extends Omit<ColumnSort, 'id'> {
 
 export interface ExtendedColumnFilter<TData> extends FilterItemSchema {
   value: any;
-  operator: string;
+  operator: FilterItemSchema['operator'];
   id: Extract<keyof TData, string>;
 }
 

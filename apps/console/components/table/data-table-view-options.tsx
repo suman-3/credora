@@ -17,9 +17,9 @@ import {
   PopoverContent,
   PopoverTrigger
 } from '@workspace/ui/components/popover';
-import { cn } from '@/lib/utils';
 import * as React from 'react';
 import { CheckIcon, CaretSortIcon } from '@radix-ui/react-icons';
+import { cn } from '@workspace/ui/lib/utils';
 
 interface DataTableViewOptionsProps<TData> {
   table: Table<TData>;

@@ -9,8 +9,8 @@ import {
   SelectTrigger,
   SelectValue
 } from '@workspace/ui/components/select';
-import { cn } from '@/lib/utils';
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons';
+import { cn } from '@workspace/ui/lib/utils';
 
 interface DataTablePaginationProps<TData> extends React.ComponentProps<'div'> {
   table: Table<TData>;

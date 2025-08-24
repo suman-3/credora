@@ -52,67 +52,69 @@ export default function AuthPage() {
     }
   }, [token, router]);
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
 
-    if (!signatureData) {
-      toast.error("No signature data available");
-      return;
+  if (!signatureData) {
+    toast.error("No signature data available");
+    return;
+  }
+
+  setSubmitting(true);
+  try {
+    const loginData = {
+      email,
+      ...signatureData,
+    };
+
+    const loginResponse = await fetch(
+      "https://api.credora.tech/api/auth/login",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: "include",
+        body: JSON.stringify(loginData),
+      }
+    );
+
+    if (!loginResponse.ok) {
+      throw new Error("Login failed");
     }
 
-    setSubmitting(true);
-    try {
-      const loginData = {
-        email,
-        ...signatureData,
-      };
+    const responseData = await loginResponse.json();
 
-      const loginResponse = await fetch(
-        "https://api.credora.tech/api/auth/login",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          credentials: "include",
-          body: JSON.stringify(loginData),
-        }
-      );
-
-      if (!loginResponse.ok) {
-        throw new Error("Login failed");
-      }
-
-      const responseData = await loginResponse.json();
-
-      // Store user data using the auth store
-      if (responseData.success && responseData.user) {
-        // Extract token from response or cookies if available
+    // Store user data using the auth store ONLY if user is verified
+    if (responseData.success && responseData.user) {
+      if (!responseData.user.isVerified) {
+        // User is not verified - show check email message, don't store data
+        setShowCheckEmail(true);
+        setShowEmailForm(false);
+      } else {
+        // User is verified - store data and redirect
         const token = responseData.token || "session-token"; // Adjust based on your API response
         login(responseData.user, token);
-
-        // Hide email form and show appropriate message
+        
+        // Hide email form and show redirecting message
         setShowEmailForm(false);
-        if (!responseData.user.isVerified) {
-          setShowCheckEmail(true);
-        } else {
-          // User is verified, show redirecting message and redirect
-          setIsRedirecting(true);
-          setTimeout(() => {
-            router.replace("/dashboard");
-          }, 2000); // Optional delay for UX
-        }
-      } else {
-        throw new Error("Invalid response format");
+        setIsRedirecting(true);
+        setTimeout(() => {
+          router.replace("/dashboard");
+        }, 2000); // Optional delay for UX
       }
-    } catch (error) {
-      const errorMessage =
-        error instanceof Error ? error.message : "Unknown error occurred";
-      toast.error(`Login error: ${errorMessage}`);
-    } finally {
-      setSubmitting(false);
+    } else {
+      throw new Error("Invalid response format");
     }
-  };
+  } catch (error) {
+    const errorMessage =
+      error instanceof Error ? error.message : "Unknown error occurred";
+    toast.error(`Login error: ${errorMessage}`);
+  } finally {
+    setSubmitting(false);
+  }
+};
+
 
   const connectAndSign = async () => {
     setConnectingWallet(true);

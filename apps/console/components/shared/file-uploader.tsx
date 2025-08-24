@@ -48,9 +48,9 @@ const FileUploaderComponent = ({
   const extractFileName = (url: string): string => {
     try {
       const urlParts = url.split('/');
-      const fileName = urlParts[urlParts.length - 1] ?? 'file.pdf';
+      const fileName = urlParts[urlParts.length - 1] ?? '';
       // Remove query parameters and decode URI
-      const cleanFileName = decodeURIComponent(((fileName ?? 'file.pdf').split('?')[0] ?? 'file.pdf'));
+      const cleanFileName = decodeURIComponent((fileName ?? '').split('?')[0] ?? '');
       return cleanFileName || 'file.pdf';
     } catch {
       return 'file.pdf';
